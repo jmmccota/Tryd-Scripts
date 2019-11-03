@@ -1,0 +1,45 @@
+// Tonny Matos Siqueira - tmsiqueira@gmail.com
+// Telegram: @tmsiqueira
+// Parametros de configuracao //
+def len = 400;
+def red = 4
+def orange = 2.5;
+def yellow = 1;
+def white = -0.5;
+// Fim Parametros de configuracao //
+
+def barras = BARS();
+r = newLines();
+r.add( barras );
+
+def vol = sharesVolume();
+def mean  = MA(vol,len, 0);
+def std = STDDEV(vol,len);
+ 
+for (int i=0;i<vol.size();i++) {
+	def bar = barras.bar(i);
+
+	double res = -5;
+
+    if (i>len) {
+	   res =  ( (vol.value(i) - mean.value(i-len)) / ( std.value(i-len )) );
+	}  
+	
+
+	if (res > red) {
+		bar.setFill(255,0,0);
+		bar.setBorder(255,0,0);
+	}else if (res > orange) {
+		bar.setFill(255,128,0);
+		bar.setBorder(255,128,0);
+	}else if (res > yellow) {
+		bar.setFill(250,244,2);
+		bar.setBorder(250,244,2);
+	}else if (res > white) {
+		bar.setFill(255,255,255);
+		bar.setBorder(255,255,255);
+	}else {
+		bar.setFill(0,252,252);
+		bar.setBorder(0,252,252);
+	}	
+}

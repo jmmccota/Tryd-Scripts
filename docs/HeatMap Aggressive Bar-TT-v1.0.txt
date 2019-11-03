@@ -1,0 +1,71 @@
+// Indicador: ClubeDoScalp HeatMap Agreessive Bar - TT
+// Tonny Matos Siqueira - tmsiqueira@gmail.com
+// Will Santos - http://youtube.com/clubedoscalp
+
+// Parametros de configuracao //
+def len = 400;
+def red = 4;
+def orange = 3;
+def yellow = 2;
+def white = 1;
+// Fim Parametros de configuracao //
+
+def barras = BARS();
+r = newLines();
+r.add( barras );
+
+def sa = SA(0,0);
+def ag = newLineData();
+
+//Identifica o tempo grafico escolhido
+def d = dates();
+Date dt1 = new Date();
+Date dt2 = new Date();
+double d_min=100000000000000.0;
+for (int i=1;i<sa.size();i++)
+{ 
+  dt1 = d.get(i);
+  dt2 = d.get(i-1);
+  def dt= dt1.getTime()-dt2.getTime();
+  if (dt<d_min) d_min=dt;
+}
+
+//Calcula a força de agressao basedo no saldo de agressão
+//ag.add(0);
+for (int i=1;i<sa.size();i++)
+{ 
+  dt1 = d.get(i);
+  dt2 = d.get(i-1);
+  def dt = dt1.getTime()-dt2.getTime();
+  if(dt == d_min)
+     ag.add(sa.value(i)-sa.value(i-1));
+  else if ((sa.value(i)-sa.value(i-1)) != 0) 
+     ag.add(sa.value(i));
+  else
+     ag.add(0);
+}
+
+def mean = MA(ag,len,0);
+def std = STDDEV(ag,len);
+
+for (int i=0;i<ag.size();i++) {
+   def bar = barras.bar(i+1);
+   def res;
+   if (i>len) res = ( (ag.value(i) - mean.value(i-len+1)) / (std.value(i-len)));
+    if (res > red || res < -red) {
+		bar.setFill(255,0,0);
+		bar.setBorder(255,0,0);
+	}else if (res > orange || res < -orange) {
+		bar.setFill(255,128,0);
+		bar.setBorder(255,128,0);
+	}else if (res > yellow || res < -yellow) {
+		bar.setFill(250,244,2);
+		bar.setBorder(250,244,2);
+	}else if (res > white || res < -white) {
+		bar.setFill(255,255,255);
+		bar.setBorder(255,255,255);
+	}else {
+		bar.setFill(0,252,252);
+		bar.setBorder(0,252,252);
+   }
+}
