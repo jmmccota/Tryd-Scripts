@@ -57,7 +57,7 @@ for (int i = 1; i < vol.size(); i++) {
         } else {
             bar.setFill(255, 255, 0); 
             bar.setBorder(149, 255, 0);
-        }
+     //   }
 	// }else if (res > yellow) { // amarelo
     //     if (cOpen > cClose) {
     //         bar.setFill(250,244,2); // Vermelho
