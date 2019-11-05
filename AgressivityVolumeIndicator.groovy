@@ -49,7 +49,6 @@ for (int i = 1; i < vol.size(); i++) {
         } else {
             bar.setFill(0, 196, 0); 
             bar.setBorder(0, 196, 0); 
-        }
 	} else if (res > orange) {
 		if (cOpen > cClose) {
             bar.setFill(255, 255, 255);
