@@ -1,6 +1,6 @@
 // @Title: Indicador: Indicador de volume de compras
 // @Author: JMMCCota
-// @Version: 0.1.0
+// @Version: 0.1.1
 
 // Settings //
 def len = 100;
