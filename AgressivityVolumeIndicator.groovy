@@ -1,6 +1,6 @@
 // @Title: Indicador: Indicador de volume de compras
 // @Author: JMMCCota
-// @Version: 0.1.1
+// @Version: 0.1.2
 
 // Settings //
 def len = 100;
@@ -71,10 +71,10 @@ for (int i = 1; i < volumeNegociosPorTempo.size(); i++) {
 	} else if (res > medioVolumeNegocios) {
 		if (cOpen > cClose) {
             bar.setFill(255, 255, 255);
-            bar.setBorder(255, 128, 0);
+            bar.setBorder(196, 0, 0);
        } else {
            bar.setFill(255, 255, 255); 
-           bar.setBorder(149, 255, 0);
+           bar.setBorder(0, 196, 0);
        }
 	// }else if (res > baixoVolumeNegocios) { // amarelo
     //     if (cOpen > cClose) {
@@ -89,7 +89,7 @@ for (int i = 1; i < volumeNegociosPorTempo.size(); i++) {
 		// bar.setBorder(255,255,255);
 		
 	} else {
-		bar.setFill(255,255,255); // Azul
-		bar.setBorder(255,255,255);		
+		bar.setFill(216,219,221); 
+		bar.setBorder(216,219,221);		
 	}
 }
